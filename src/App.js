@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Picker from './components/Picker';
+import InfoPanel from './components/InfoPanel';
+
 
 function App() {
+  const [selectedSenator, setSelectedSenator] = useState(undefined)
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Picker onSelect={(e) => setSelectedSenator(e.value)}/>
+      <div>
+        <InfoPanel senatorData={selectedSenator}/>
+      </div>
     </div>
   );
 }
