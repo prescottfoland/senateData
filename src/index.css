@@ -18,6 +18,7 @@ code {
   height: 100vh;
 }
 
+
 .App {
   display: flex;
   height: 100%;
@@ -26,20 +27,15 @@ code {
 
 .pickerContainer {
   display: flex;
-  padding: 0 10px;
-  min-width: 400px;
   justify-content: center;
   align-items: center;
   background-color: #5a5a5a;
 }
 
-.pickerContainer .picker {
-  width: 90%;
-}
-
 .infoPanel {
   display: flex;
   flex-direction: column;
+  overflow: scroll;
   flex-grow: 1;
   padding: 20px 10px;
 }
@@ -50,7 +46,7 @@ code {
 }
 
 .chart-container {
-  width: 600px;
+  width: 100%;
   flex-direction: column;
 }
 
@@ -102,4 +98,31 @@ code {
 
 p {
   text-align: left;
+}
+
+@media screen and (max-width: 575px) {
+  .App {
+    flex-direction: column;
+  }
+  .pickerContainer {
+    width: 100%;
+    min-width: unset;
+    padding: 10px 0;
+  }
+}
+
+@media screen and (min-width: 575px) {
+  .App {
+    flex-direction: row;
+  }
+
+  .pickerContainer {
+    padding: 0 10px;
+    min-width: 400px;
+  }
+
+  .pickerContainer .picker {
+    width: 90%;
+  }
+
 }
