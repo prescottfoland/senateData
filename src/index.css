@@ -32,6 +32,10 @@ code {
   background-color: #5a5a5a;
 }
 
+.pickerContainer > .picker {
+  width: 90%;
+}
+
 .infoPanel {
   display: flex;
   flex-direction: column;
@@ -115,14 +119,8 @@ p {
   .App {
     flex-direction: row;
   }
-
   .pickerContainer {
     padding: 0 10px;
     min-width: 400px;
   }
-
-  .pickerContainer .picker {
-    width: 90%;
-  }
-
 }
