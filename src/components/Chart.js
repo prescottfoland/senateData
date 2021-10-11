@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import { buildUrl } from '../App';
-import { Bar, ChartOptions} from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import moment from 'moment'
-import CommitteeList from './CommitteeList';
 
 const Chart = ({ candidateID, totalsData }) => {
     const [chartLabels, setChartLabels] = useState(undefined)
     const [chartData, setChartData] = useState(undefined)
-    const [committeeList, setCommitteeList] = useState(undefined)
     
 
     useEffect(() => {

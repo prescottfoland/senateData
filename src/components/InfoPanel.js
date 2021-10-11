@@ -9,32 +9,26 @@ const InfoPanel = ({ bioData, FECData }) => {
     const [massTotal, setMassTotal] = useState(undefined)
 
     useEffect(() => {
-        const getInfo = async () => {
-            const data = await fetchData()
-            setCandidateTotals(data)
+        const fetchData = async () => {
+            const endpoint = `candidate/${FECData.candidate_id}/totals/`
+            const params = [
+                'election_full=true',
+                'sort_nulls_last=true',
+                'sort=cycle',
+                'per_page=50'
+            ]
+            const fetchInfo = await fetch(buildUrl(endpoint, params))
+            const info = await fetchInfo.json()
+            const _filteredData = await info.results.filter((_result) => _result['contributions'] > 0)
+            setCandidateTotals(_filteredData)
             let _massTotal = 0;
-            data.forEach((_cycleResult) => {
+            _filteredData.forEach((_cycleResult) => {
                 _massTotal = _massTotal + _cycleResult.contributions
             })
             setMassTotal(_massTotal)
         }
-        getInfo()
+        fetchData()
     }, [FECData]);
-
-    const fetchData = async () => {
-        const endpoint = `candidate/${FECData.candidate_id}/totals/`
-        const params = [
-            'election_full=true',
-            'sort_nulls_last=true',
-            'sort=cycle',
-            'per_page=50'
-        ]
-        const fetchInfo = await fetch(buildUrl(endpoint, params))
-        const info = await fetchInfo.json()
-        const _filtered = await info.results.filter((_result) => _result['contributions'] > 0)
-        return _filtered
-    }
-
     
     return (
         <div className="infoPanel">

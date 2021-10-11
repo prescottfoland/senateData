@@ -30,21 +30,6 @@ function App() {
     return fetchUrl
   }
 
-  const getCandidateInfo = async (candidateID) => {
-    const endpoint = `candidate/${candidateID}`
-    const params = [
-        'page=1',
-        'per_page=100'
-
-    ]
-    const fetchInfo = await fetch(buildUrl(endpoint, params))
-    const info = await fetchInfo.json()
-    const _results = info.results[0]
-
-    console.log(_results)
-    return _results
-}
-
   const senatorSelected = async (senatorBioData) => {
     setBioData(senatorBioData)
     const params = [

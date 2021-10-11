@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 const BioInfo = ({ bioData, FECData, massTotal }) => {
-    const [candidateInfo, setCandidateInfo] = useState(undefined)
     const [firstElected, setFirstElected] = useState(undefined)
     const [timesElected, setTimesElected] = useState(undefined)
     const [nextElectionYear, setNextElectionYear] = useState(undefined)
@@ -9,7 +8,6 @@ const BioInfo = ({ bioData, FECData, massTotal }) => {
     useEffect(() => {
         setTimesElected(FECData['election_years'].length - 1)
         setNextElectionYear(FECData['election_years'][FECData['election_years'].length - 1])
-        setCandidateInfo(FECData)
         setFirstElected(FECData['election_years'][0])
     }, [bioData, FECData]);
 
