@@ -31,7 +31,7 @@ const InfoPanel = ({ bioData, FECData }) => {
     }, [FECData]);
     
     return (
-        <div className="infoPanel">
+        <div className="infoPanel bioInfo">
             <BioInfo bioData={bioData} FECData={FECData} massTotal={massTotal}/>
             {candidateTotals && <Chart candidateID={FECData.candidate_id} totalsData={candidateTotals}/>}
             <p>
