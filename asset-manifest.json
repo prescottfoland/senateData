@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/senateData/static/css/main.215a685e.chunk.css",
+    "main.css": "/senateData/static/css/main.5043ad8d.chunk.css",
     "main.js": "/senateData/static/js/main.ea927128.chunk.js",
     "main.js.map": "/senateData/static/js/main.ea927128.chunk.js.map",
     "runtime-main.js": "/senateData/static/js/runtime-main.91c485e9.js",
@@ -10,13 +10,13 @@
     "static/js/3.e9e6446b.chunk.js": "/senateData/static/js/3.e9e6446b.chunk.js",
     "static/js/3.e9e6446b.chunk.js.map": "/senateData/static/js/3.e9e6446b.chunk.js.map",
     "index.html": "/senateData/index.html",
-    "static/css/main.215a685e.chunk.css.map": "/senateData/static/css/main.215a685e.chunk.css.map",
+    "static/css/main.5043ad8d.chunk.css.map": "/senateData/static/css/main.5043ad8d.chunk.css.map",
     "static/js/2.a088c081.chunk.js.LICENSE.txt": "/senateData/static/js/2.a088c081.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.91c485e9.js",
     "static/js/2.a088c081.chunk.js",
-    "static/css/main.215a685e.chunk.css",
+    "static/css/main.5043ad8d.chunk.css",
     "static/js/main.ea927128.chunk.js"
   ]
 }
