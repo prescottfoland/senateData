@@ -1,31 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { buildUrl } from '../App';
+import BioInfo from './BioInfo';
+import Chart from './Chart';
+import CommitteeList from './CommitteeList';
 
-const InfoPanel = ({ senatorData }) => {
+const InfoPanel = ({ bioData, FECData }) => {
+    const [candidateTotals, setCandidateTotals] = useState(undefined)
+    const [massTotal, setMassTotal] = useState(undefined)
 
     useEffect(() => {
         const getInfo = async () => {
-            const data = await fetchInfo();
-            console.log(data)
-          }
-      
-          getInfo()
-    }, [senatorData]);
-
-    const fetchInfo = async () => {
-        if (senatorData) {
-            const res = await fetch(`https://api.open.fec.gov/v1/names/candidates/?q=[${senatorData.person.lastname},${senatorData.person.firstname}]&api_key=z777qVMhaX87xQbmyv9YUaaH2R6kODSpXoop10j8`)
-            const data = await res.json()
-            const id = data['results'].filter((instance) => instance.office_sought === "S")[0]['id']
-            const fetchInfo = await fetch(`https://api.open.fec.gov/v1/candidate/${id}/?api_key=z777qVMhaX87xQbmyv9YUaaH2R6kODSpXoop10j8`)
-            const info = await fetchInfo.json()
-            return info
+            const data = await fetchData()
+            setCandidateTotals(data)
+            let _massTotal = 0;
+            data.forEach((_cycleResult) => {
+                _massTotal = _massTotal + _cycleResult.contributions
+            })
+            setMassTotal(_massTotal)
         }
-      }
+        getInfo()
+    }, [FECData]);
+
+    const fetchData = async () => {
+        const endpoint = `candidate/${FECData.candidate_id}/totals/`
+        const params = [
+            'election_full=true',
+            'sort_nulls_last=true',
+            'sort=cycle',
+            'per_page=50'
+        ]
+        const fetchInfo = await fetch(buildUrl(endpoint, params))
+        const info = await fetchInfo.json()
+        const _filtered = await info.results.filter((_result) => _result['contributions'] > 0)
+        return _filtered
+    }
 
     
     return (
-        <div>
-            {senatorData ? <span>{senatorData.person.name}</span> : <span>none selected</span>}
+        <div className="infoPanel">
+            <BioInfo bioData={bioData} FECData={FECData} massTotal={massTotal}/>
+            {candidateTotals && <Chart candidateID={FECData.candidate_id} totalsData={candidateTotals}/>}
+            <p>
+                <span>this total does not include funds raised by committees associated with {bioData.role_type_label} {bioData.person.lastname} which are listed below.</span>
+            </p>
+            <p>
+                <span>it also does not include funds raised through PACs, Super-PACs, and 501(c) groups</span>
+            </p>
+            <CommitteeList candidateID={FECData.candidate_id}/>
         </div>
     )
 }
